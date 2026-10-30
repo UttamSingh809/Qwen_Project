@@ -1,0 +1,32 @@
+{
+  "name": "taskflow",
+  "private": true,
+  "version": "1.0.0",
+  "description": "TaskFlow: full-stack project management platform (monorepo)",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"npm run dev -w @taskflow/server\" \"npm run dev -w @taskflow/client\"",
+    "build": "npm run build -w @taskflow/server && npm run build -w @taskflow/client",
+    "start": "npm run start -w @taskflow/server",
+    "test": "npm run test -w @taskflow/server && npm run test -w @taskflow/client",
+    "test:backend": "npm run test -w @taskflow/server",
+    "test:frontend": "npm run test -w @taskflow/client",
+    "test:e2e": "npm run test:e2e -w @taskflow/client",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "typecheck": "npm run typecheck -w @taskflow/server && npm run typecheck -w @taskflow/client",
+    "db:migrate": "npm run db:migrate -w @taskflow/server",
+    "db:seed": "npm run db:seed -w @taskflow/server",
+    "db:generate": "npm run db:generate -w @taskflow/server",
+    "coverage": "npm run coverage -w @taskflow/server"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "prettier": "^3.3.3"
+  }
+}
